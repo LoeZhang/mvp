@@ -11,7 +11,8 @@ class TestPresenter : BasePresenter()
 {
     fun go()
     {
-        toast(invoke("goHome", 233, "顺丰到付都是") as String)
+        val b = "goHome".invokeToString(233, "顺丰到付都是")
+        toast(b)
     }
 }
 
@@ -39,7 +40,7 @@ class TestActivity : BaseMvpActivity<TestPresenter>()
     @Keep
     fun goHome(n: Int, s: String): String
     {
-        buttonGo.text = "哈哈哈$s~  gohome！！$n"
+        buttonGo.text = "哈哈哈$s~  goHome！！$n"
         return "我是返回"
     }
 }

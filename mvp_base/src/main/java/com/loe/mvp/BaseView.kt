@@ -14,6 +14,8 @@ interface BaseView
 
     fun toast(msg: CharSequence?)= toast.show(msg ?: "")
 
+    fun toast(o: Any?) = toast.show("" + o)
+
     fun showLoading(msg: CharSequence = "") = loading.show(msg)
 
     fun cancelLoading() = loading.cancel()

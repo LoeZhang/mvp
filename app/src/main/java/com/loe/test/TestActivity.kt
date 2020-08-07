@@ -7,15 +7,6 @@ import com.loe.mvp.mvp.BaseMvpActivity
 import com.loe.mvp.start
 import kotlinx.android.synthetic.main.activity_model.*
 
-class TestPresenter : BasePresenter()
-{
-    fun go()
-    {
-        val b = "goHome".invokeToString(233, "顺丰到付都是")
-        toast(b)
-    }
-}
-
 class TestActivity : BaseMvpActivity<TestPresenter>()
 {
     override fun onCreate(savedInstanceState: Bundle?)
@@ -42,5 +33,21 @@ class TestActivity : BaseMvpActivity<TestPresenter>()
     {
         buttonGo.text = "哈哈哈$s~  goHome！！$n"
         return "我是返回"
+    }
+
+    @Keep
+    fun goMain()
+    {
+        toast("main哒哒哒哒哒哒")
+    }
+}
+
+class TestPresenter : BasePresenter()
+{
+    fun go()
+    {
+        val s = "goHome".invokeToString(233, "顺丰到付都是")
+        toast(s)
+        "goMain".invoke()
     }
 }

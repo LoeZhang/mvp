@@ -2,7 +2,7 @@ package com.loe.mvp
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.support.v7.app.AppCompatActivity
 import com.loe.mvp.initer.BaseLoading
 import com.loe.mvp.initer.BaseToast
 

@@ -1,7 +1,7 @@
 package com.loe.test
 
 import android.os.Bundle
-import androidx.annotation.Keep
+import android.support.annotation.Keep
 import com.loe.mvp.BasePresenter
 import com.loe.mvp.mvp.BaseMvpActivity
 import com.loe.mvp.start

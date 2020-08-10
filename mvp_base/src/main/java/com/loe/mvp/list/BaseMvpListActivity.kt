@@ -1,7 +1,7 @@
 package com.loe.mvp.list
 
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.loe.mvp.BasePresenter
 import com.loe.mvp.mvp.BaseMvpActivity

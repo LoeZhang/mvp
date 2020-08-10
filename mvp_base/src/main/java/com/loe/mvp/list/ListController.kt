@@ -63,13 +63,15 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
             adapter.setOnLoadMoreListener(this, recyclerView)
         }
 
+        adapter.setHeaderFooterEmpty(true, true)
+
         // 空白页
         val empty = TextView(activity)
         empty.text = "暂无数据"
         empty.setTextColor(Color.parseColor("#aaaaaa"))
         empty.textSize = 13f
         empty.setPadding(0,
-            dp_Px(125), 0, 0)
+            dp_Px(125), 0, dp_Px(20))
         empty.gravity = Gravity.CENTER_HORIZONTAL
         adapter.emptyView = empty
     }

@@ -3,10 +3,11 @@ package com.loe.mvp.list
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.loe.mvp.BasePresenter
+import com.loe.mvp.BaseModel
+import com.loe.mvp.BaseModelPresenter
 import com.loe.mvp.mvp.BaseMvpActivity
 
-abstract class BaseMvpListActivity<PRESENTER : BasePresenter, BEAN> : BaseMvpActivity<PRESENTER>()
+abstract class BaseMvpListActivity<PRESENTER : BaseModelPresenter<MODEL>, MODEL: BaseModel, BEAN> : BaseMvpActivity<PRESENTER, MODEL>()
 {
     var listController = object: ListController<BEAN>()
     {

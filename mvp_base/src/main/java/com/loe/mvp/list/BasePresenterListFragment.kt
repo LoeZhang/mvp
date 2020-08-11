@@ -3,17 +3,16 @@ package com.loe.mvp.list
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.loe.mvp.BaseModel
-import com.loe.mvp.BaseModelPresenter
-import com.loe.mvp.mvp.BaseMvpFragment
+import com.loe.mvp.BasePresenter
+import com.loe.mvp.mvp.BasePresenterFragment
 
-abstract class BaseMvpListFragment<PRESENTER : BaseModelPresenter<MODEL>, MODEL: BaseModel, BEAN> : BaseMvpFragment<PRESENTER, MODEL>()
+abstract class BasePresenterListFragment<PRESENTER : BasePresenter, BEAN> : BasePresenterFragment<PRESENTER>()
 {
     var listController = object: ListController<BEAN>()
     {
-        override fun loadData(isRefresh: Boolean) = this@BaseMvpListFragment.loadData(isRefresh)
+        override fun loadData(isRefresh: Boolean) = this@BasePresenterListFragment.loadData(isRefresh)
 
-        override fun getListAdapter() = this@BaseMvpListFragment.getListAdapter()
+        override fun getListAdapter() = this@BasePresenterListFragment.getListAdapter()
     }
 
     fun init(recyclerView: RecyclerView?, refreshLayout: SwipeRefreshLayout? = null, isEnableLoad: Boolean = true)

@@ -1,25 +1,14 @@
 package com.loe.mvp
 
-open class BasePresenter
+open class BaseModel
 {
     lateinit var view: BaseView
 
     constructor()
 
-    constructor(view: BaseView)
-    {
-        init(view)
-    }
+    constructor(view: BaseView) { init(view) }
 
-    internal fun init(view: BaseView)
-    {
-        this.view = view
-        onInit()
-    }
-
-    open fun onInit()
-    {
-    }
+    internal fun init(view: BaseView) { this.view = view }
 
     /********************** 实现View的方法 *********************/
 

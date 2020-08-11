@@ -1,13 +1,14 @@
 package com.loe.test
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.Keep
-import com.loe.mvp.BasePresenter
+import android.view.View.GONE
+import com.loe.mvp.*
 import com.loe.mvp.mvp.BaseMvpActivity
-import com.loe.mvp.start
 import kotlinx.android.synthetic.main.activity_model.*
 
-class TestActivity : BaseMvpActivity<TestPresenter>()
+class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
 {
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -17,6 +18,8 @@ class TestActivity : BaseMvpActivity<TestPresenter>()
         buttonGo.setOnClickListener()
         {
             presenter.go()
+//            model.same()
+
         }
 
         buttonNew.setOnClickListener()
@@ -38,16 +41,32 @@ class TestActivity : BaseMvpActivity<TestPresenter>()
     @Keep
     fun goMain()
     {
+        buttonNew.visibility = GONE
         toast("main哒哒哒哒哒哒")
     }
 }
 
-class TestPresenter : BasePresenter()
+class TestPresenter : BaseModelPresenter<TestModel>()
 {
+    override fun onInit()
+    {
+        model.same()
+    }
+
     fun go()
     {
-        val s = "goHome".invokeToString(233, "顺丰到付都是")
-        toast(s)
+//        val s = "goHome".invokeToString(233, "顺丰到付都是")
+//        toast(s)
+//        "goMain".invoke()
+
+        model.same()
+    }
+}
+
+class TestModel : BaseModel()
+{
+    fun same()
+    {
         "goMain".invoke()
     }
 }

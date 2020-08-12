@@ -1,22 +1,33 @@
 package com.loe.mvp
 
+import android.app.Activity
+
 open class BaseModel
 {
     lateinit var view: BaseView
+        protected set
 
     constructor()
 
-    constructor(view: BaseView) { init(view) }
+    constructor(view: BaseView)
+    {
+        init(view)
+    }
 
-    internal fun init(view: BaseView) { this.view = view }
+    fun init(view: BaseView)
+    {
+        this.view = view
+    }
+
+    protected val activity: Activity get() = view.root
 
     /********************** 实现View的方法 *********************/
 
     fun runOnUi(run: () -> Unit) = view.runOnUi(run)
 
-    fun toast(msg: CharSequence?)= view.toast(msg)
+    fun toast(msg: CharSequence?) = view.toast(msg)
 
-    fun toast(o: Any?)= view.toast(o)
+    fun toast(o: Any?) = view.toast(o)
 
     fun showLoading(msg: CharSequence = "") = view.showLoading(msg)
 

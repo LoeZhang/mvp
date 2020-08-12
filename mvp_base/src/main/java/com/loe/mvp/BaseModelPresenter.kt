@@ -1,8 +1,9 @@
 package com.loe.mvp
 
-open class BaseModelPresenter<MODEL: BaseModel> : BasePresenter
+open class BaseModelPresenter<MODEL : BaseModel> : BasePresenter
 {
     lateinit var model: MODEL
+        protected set
 
     constructor()
 
@@ -11,7 +12,7 @@ open class BaseModelPresenter<MODEL: BaseModel> : BasePresenter
         init(view, model)
     }
 
-    internal fun init(view: BaseView, model: MODEL)
+    fun init(view: BaseView, model: MODEL)
     {
         this.view = view
         this.model = model

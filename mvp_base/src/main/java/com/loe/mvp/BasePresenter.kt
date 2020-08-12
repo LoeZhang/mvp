@@ -1,8 +1,11 @@
 package com.loe.mvp
 
+import android.app.Activity
+
 open class BasePresenter
 {
     lateinit var view: BaseView
+        protected set
 
     constructor()
 
@@ -11,7 +14,7 @@ open class BasePresenter
         init(view)
     }
 
-    internal fun init(view: BaseView)
+    fun init(view: BaseView)
     {
         this.view = view
         onInit()
@@ -21,13 +24,15 @@ open class BasePresenter
     {
     }
 
+    protected val activity: Activity get() = view.root
+
     /********************** 实现View的方法 *********************/
 
     fun runOnUi(run: () -> Unit) = view.runOnUi(run)
 
-    fun toast(msg: CharSequence?)= view.toast(msg)
+    fun toast(msg: CharSequence?) = view.toast(msg)
 
-    fun toast(o: Any?)= view.toast(o)
+    fun toast(o: Any?) = view.toast(o)
 
     fun showLoading(msg: CharSequence = "") = view.showLoading(msg)
 

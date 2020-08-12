@@ -1,5 +1,6 @@
 package com.loe.mvp.list
 
+import android.support.annotation.Keep
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -35,17 +36,20 @@ abstract class BasePresenterListActivity<PRESENTER : BasePresenter, BEAN> : Base
     /**
      * 加载失败调用
      */
+    @Keep
     fun loadError(isRefresh: Boolean) = listController.loadError(isRefresh)
 
     /**
      * 设置refreshLayout刷新状态
      */
+    @Keep
     fun setRefreshing(refreshing: Boolean) = listController.setRefreshing(refreshing)
 
     /**
      * 加载列表数据
      * @param isRefresh 是否为刷新
      */
+    @Keep
     abstract fun loadData(isRefresh: Boolean)
 
     /**

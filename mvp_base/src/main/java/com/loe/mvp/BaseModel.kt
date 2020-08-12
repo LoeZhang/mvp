@@ -50,4 +50,12 @@ open class BaseModel
     fun String.invokeToFloat(vararg params: Any): Float = view.invoke(this, *params) as Float
 
     fun String.invokeToBoolean(vararg params: Any): Boolean = view.invoke(this, *params) as Boolean
+
+    /********************** 实现List的方法 *********************/
+
+    fun loadError(isRefresh: Boolean) = "loadError".invoke(isRefresh)
+
+    fun setRefreshing(refreshing: Boolean) = "setRefreshing".invoke(refreshing)
+
+    fun loadData(isRefresh: Boolean) = "loadData".invoke(isRefresh)
 }

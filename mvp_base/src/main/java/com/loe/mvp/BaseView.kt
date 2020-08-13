@@ -37,4 +37,22 @@ interface BaseView
         }
         return null
     }
+
+    fun invokeSupper(name: String, vararg params: Any): Any?
+    {
+        this::class.java.methods.forEach()
+        {
+            if (it.name == name)
+            {
+                try
+                {
+                    it.isAccessible = true
+                    return it.invoke(this, *params)
+                } catch (e: Exception)
+                {
+                }
+            }
+        }
+        return null
+    }
 }

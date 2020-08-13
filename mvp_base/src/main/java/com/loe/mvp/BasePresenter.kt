@@ -59,9 +59,9 @@ open class BasePresenter
 
     /********************** 实现List的方法 *********************/
 
-    fun loadError(isRefresh: Boolean) = "loadError".invoke(isRefresh)
+    fun loadError(isRefresh: Boolean) = view.invokeSupper("loadError", isRefresh)
 
-    fun setRefreshing(refreshing: Boolean) = "setRefreshing".invoke(refreshing)
+    fun setRefreshing(refreshing: Boolean) = view.invokeSupper("setRefreshing", refreshing)
 
     fun loadData(isRefresh: Boolean) = "loadData".invoke(isRefresh)
 }

@@ -78,6 +78,6 @@ class TestModel : BaseModel()
     {
 //        toast("goMain".invokeToString())
         "goHome".invokeToString("顺丰到付都是")
-        
+
     }
 }

@@ -73,7 +73,7 @@ fun Context?.start(cls: Class<out Activity>, delay: Long = 0): XIntent
         {
             if (this is FragmentActivity) ResultUtil.startResult(this, intent, intent.onResult)
         }
-        if(this is Activity)
+        if (this is Activity)
         {
             if (intent.isFinish) finish()
             intent.onAfter?.invoke(this)
@@ -295,23 +295,23 @@ fun Context.color(id: Int): Int
     return ContextCompat.getColor(this, id)
 }
 
-fun Context.inflate(layoutId: Int, root: ViewGroup? = null)
+fun Context.inflate(layoutId: Int, root: ViewGroup? = null): View
 {
-    LayoutInflater.from(this).inflate(layoutId, root)
+    return LayoutInflater.from(this).inflate(layoutId, root)
 }
 
-fun Activity.getWindowWidth()
+fun Activity.getWindowWidth(): Int
 {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
-    displayMetrics.widthPixels
+    return displayMetrics.widthPixels
 }
 
-fun Activity.getWindowHeight()
+fun Activity.getWindowHeight(): Int
 {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
-    displayMetrics.heightPixels
+    return displayMetrics.heightPixels
 }
 
 fun Activity.hideSoft()

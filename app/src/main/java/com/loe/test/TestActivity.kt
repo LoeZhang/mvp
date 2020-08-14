@@ -18,8 +18,8 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
         buttonGo.setOnClickListener()
         {
             presenter.go()
+//            "goMain".invokeToString()
 //            model.same()
-
         }
 
         buttonNew.setOnClickListener()
@@ -28,21 +28,26 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
         }
     }
 
+    override fun initView()
+    {
+    }
+
     /**
      * Presenter需要反射调用的方法，@Keep保持不被混淆
      */
     @Keep
-    fun goHome(n: Int, s: String): String
+    fun goHome(s: String): String
     {
-        buttonGo.text = "哈哈哈$s~  goHome！！$n"
+        buttonGo.text = "哈哈哈$s~  goHome！！"
         return "我是返回"
     }
 
     @Keep
-    fun goMain()
+    fun goMain():String
     {
         buttonNew.visibility = GONE
-        toast("main哒哒哒哒哒哒")
+        toast("11111main哒哒哒哒哒哒")
+        return "傻了吧唧"
     }
 }
 
@@ -67,6 +72,12 @@ class TestModel : BaseModel()
 {
     fun same()
     {
-        "goMain".invoke()
+//        toast("goMain".invokeToString())
+        "goHome".invokeToString("顺丰到付都是")
+
+        view.run()
+        {
+            finish()
+        }
     }
 }

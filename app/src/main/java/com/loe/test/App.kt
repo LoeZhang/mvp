@@ -1,6 +1,11 @@
 package com.loe.test
 
+import android.app.Activity
 import android.app.Application
+import android.widget.Toast
+import com.loe.mvp.initer.BaseIniter
+import com.loe.mvp.initer.OnBaseView
+import org.greenrobot.eventbus.EventBus
 
 /**
  * App
@@ -54,5 +59,23 @@ class App : Application()
 //                toast?.show(msg)
 //            }
 //        })
+
+        BaseIniter.init(object : OnBaseView
+        {
+            override fun onCreate(o: Any)
+            {
+                runCatching { EventBus.getDefault().register(o) }
+            }
+
+            override fun onResume(o: Any)
+            {
+                if (o is Activity) Toast.makeText(o, "省市都是所多", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onDestroy(o: Any)
+            {
+                EventBus.getDefault().unregister(o)
+            }
+        })
     }
 }

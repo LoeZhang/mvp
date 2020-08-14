@@ -1,7 +1,7 @@
 package com.loe.mvp
 
 import android.app.Activity
-import android.support.annotation.Keep
+import kotlin.reflect.KClass
 
 open class BasePresenter
 {
@@ -39,29 +39,52 @@ open class BasePresenter
 
     fun cancelLoading() = view.cancelLoading()
 
+    fun start(cls: Class<out Activity>, delay: Long = 0) = view.start(cls, delay)
+
+    fun start(kCls: KClass<out Activity>, delay: Long = 0) = view.start(kCls, delay)
+
+    fun finish() = view.root.finish()
+
+    fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = view.root.overridePendingTransition(enterAnim, exitAnim)
+
+    /**
+     * 实现常用方法
+     */
+    fun initView() = view.initView()
+
+    fun initEvent() = view.initEvent()
+
+    fun initData() = view.initData()
+
+    fun loadData() = view.loadData()
+
+    /**
+     * 实现List方法
+     */
+    fun loadError(isRefresh: Boolean) = view.loadError(isRefresh)
+
+    fun setRefreshing(refreshing: Boolean) = view.setRefreshing(refreshing)
+
+    fun loadData(isRefresh: Boolean) = view.loadData(isRefresh)
+
     /**
      * 执行View的方法
      * "方法名".invoke([参数1,参数2...])
      */
-    fun String.invoke(vararg params: Any): Any? = view.invoke(this, *params)
+    fun String.invoke(vararg params: Any): Any? = view.invokeName(this, *params)
 
-    fun <T> String.invokeTo(vararg params: Any): T = view.invoke(this, *params) as T
+    fun String.invokeSuper(vararg params: Any): Any? = view.invokeNameSupper(this, *params)
 
-    fun String.invokeToString(vararg params: Any): String = view.invoke(this, *params) as String
+    fun <T> String.invokeTo(vararg params: Any): T = view.invokeName(this, *params) as T
 
-    fun String.invokeToInt(vararg params: Any): Int = view.invoke(this, *params) as Int
+    fun String.invokeToString(vararg params: Any): String = view.invokeName(this, *params) as String
 
-    fun String.invokeToDouble(vararg params: Any): Double = view.invoke(this, *params) as Double
+    fun String.invokeToInt(vararg params: Any): Int = view.invokeName(this, *params) as Int
 
-    fun String.invokeToFloat(vararg params: Any): Float = view.invoke(this, *params) as Float
+    fun String.invokeToDouble(vararg params: Any): Double = view.invokeName(this, *params) as Double
 
-    fun String.invokeToBoolean(vararg params: Any): Boolean = view.invoke(this, *params) as Boolean
+    fun String.invokeToFloat(vararg params: Any): Float = view.invokeName(this, *params) as Float
 
-    /********************** 实现List的方法 *********************/
+    fun String.invokeToBoolean(vararg params: Any): Boolean = view.invokeName(this, *params) as Boolean
 
-    fun loadError(isRefresh: Boolean) = view.invokeSupper("loadError", isRefresh)
-
-    fun setRefreshing(refreshing: Boolean) = view.invokeSupper("setRefreshing", refreshing)
-
-    fun loadData(isRefresh: Boolean) = "loadData".invoke(isRefresh)
 }

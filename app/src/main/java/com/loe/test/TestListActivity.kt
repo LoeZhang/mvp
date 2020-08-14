@@ -28,7 +28,7 @@ class TestListActivity : BaseListActivity<String>()
         refresh()
     }
 
-    private fun initView()
+    override fun initView()
     {
         // 添加列表的头布局
         val header = TextView(this)

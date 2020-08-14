@@ -3,6 +3,7 @@ package com.loe.mvp
 import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.BaseLoading
 import com.loe.mvp.initer.BaseToast
 
@@ -18,9 +19,23 @@ open class BaseActivity: AppCompatActivity(), BaseView
         mToast = BaseToast(activity)
         mLoading = BaseLoading(activity)
         super.onCreate(savedInstanceState)
+
+        BaseIniter.onBaseView?.onCreate(this)
     }
 
     override val root: Activity get() = activity
     override val toast: BaseToast get() = mToast
     override val loading: BaseLoading get() = mLoading
+
+    override fun onResume()
+    {
+        super.onResume()
+        BaseIniter.onBaseView?.onResume(this)
+    }
+
+    override fun onDestroy()
+    {
+        super.onDestroy()
+        BaseIniter.onBaseView?.onDestroy(this)
+    }
 }

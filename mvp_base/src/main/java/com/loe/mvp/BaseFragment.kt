@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.BaseLoading
 import com.loe.mvp.initer.BaseToast
 
@@ -28,6 +29,8 @@ abstract class BaseFragment : Fragment(), BaseView
         mToast = BaseToast(activity!!)
         mLoading = BaseLoading(activity!!)
 
+        BaseIniter.onBaseView?.onCreate(this)
+
         onCreated(savedInstanceState)
     }
 
@@ -37,4 +40,16 @@ abstract class BaseFragment : Fragment(), BaseView
     override val root: Activity get() = activity!!
     override val toast: BaseToast get() = mToast
     override val loading: BaseLoading get() = mLoading
+
+    override fun onResume()
+    {
+        super.onResume()
+        BaseIniter.onBaseView?.onResume(this)
+    }
+
+    override fun onDestroy()
+    {
+        super.onDestroy()
+        BaseIniter.onBaseView?.onDestroy(this)
+    }
 }

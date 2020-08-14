@@ -13,7 +13,7 @@ class TestFragment : BaseFragment()
         initEvent()
     }
 
-    private fun initEvent()
+    override fun initEvent()
     {
         button.setOnClickListener()
         {

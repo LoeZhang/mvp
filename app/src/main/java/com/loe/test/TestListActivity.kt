@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.loe.mvp.addOnItemChildClickListener
-import com.loe.mvp.addOnItemClickListener
+import com.loe.mvp.ext_app.addOnItemChildClickListener
+import com.loe.mvp.ext_app.addOnItemClickListener
 import com.loe.mvp.list.BaseListActivity
 import kotlinx.android.synthetic.main.activity_list.*
 

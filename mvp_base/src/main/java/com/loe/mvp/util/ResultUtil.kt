@@ -1,4 +1,4 @@
-package com.loe.mvp
+package com.loe.mvp.util
 
 import android.app.Activity
 import android.app.Activity.RESULT_OK
@@ -38,7 +38,11 @@ object ResultUtil
     @JvmStatic
     fun startResult(activity: Activity, cls: Class<*>, onResult: ((ResultBean) -> Unit)? = null)
     {
-        startResult(activity, Intent(activity, cls), onResult)
+        startResult(
+            activity,
+            Intent(activity, cls),
+            onResult
+        )
     }
 
     class ResultFragment : Fragment()
@@ -55,7 +59,12 @@ object ResultUtil
         {
             super.onActivityResult(requestCode, resultCode, data)
             if (requestCode != 14) return
-            onResult?.invoke(ResultBean(resultCode, data))
+            onResult?.invoke(
+                ResultBean(
+                    resultCode,
+                    data
+                )
+            )
             onResult = null
         }
     }

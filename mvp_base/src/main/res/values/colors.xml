@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5084fe</color>
-    <color name="colorPrimaryDark">#4d4f57</color>
-    <color name="colorAccent">#0B38A3</color>
+    <color name="colorPrimary">#0a88dd</color>
+    <color name="colorPrimaryDark">#4B526D</color>
+    <color name="colorAccent">#00528A</color>
+    <color name="colorPrimaryAlpha">#dce6ff</color>
+    <color name="colorPrimaryWeak">#d4dffb</color>
+
+    <color name="main">#0a88dd</color>
+    <color name="mask">#990a88dd</color>
+    <color name="sign">#feebee</color>
+    <color name="link">#0a88dd</color>
+
+    <color name="mainBlack">#6b3400</color>
+    <color name="grayMask">#99717897</color>
+    <color name="cyanMask">#9922d0a3</color>
+
+    <color name="alpha">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="bgColorLight">#F9FAFC</color>
+    <color name="bgColor">#f5f6fa</color>
+    <color name="bgColorDeep">#F0F1F5</color>
+    <color name="lineColor">#dadce6</color>
+    <color name="hintColor">#B8BCC5</color>
+    <color name="grayColor">#9C9FA8</color>
+    <color name="grayColorDeep">#787D8B</color>
+    <color name="textColor">#404550</color>
+    <color name="black">#000</color>
+
+    <color name="darkText">#c000</color>
+    <color name="lightText">#dfff</color>
+
+    <color name="point">#FF3333</color>
+    <color name="red">#f63c54</color>
+    <color name="orange">#ffc44c</color>
+    <color name="yellow">#f2e033</color>
+    <color name="green">#55d13a</color>
+    <color name="cyan">#22d0a3</color>
+    <color name="blue">#46B4EB</color>
+    <color name="purple">#b54fe6</color>
+    <color name="pink">#f69ed3</color>
+
+    <color name="greenDeep">#19A500</color>
 </resources>

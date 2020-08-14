@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="LoeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/white</item>
+        <!-- 窗口跳转动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorHint">@color/hintColor</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorPrimary</item>
+
+    </style>
+
+    <style name="SplashTheme" parent="LoeTheme">
+        <!--解决启动时的白屏问题-->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <!--<item name="android:windowIsTranslucent"> true </item>-->
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityCloseEnterAnimation">
+            @anim/slide_left_in
+        </item>
+        <item name="android:activityCloseExitAnimation">
+            @anim/slide_right_out
+        </item>
+        <item name="android:activityOpenEnterAnimation">
+            @anim/slide_right_in
+        </item>
+        <item name="android:activityOpenExitAnimation">
+            @anim/slide_left_out
+        </item>
+    </style>
+
+    <style name="popupAnimation">
+        <!-- 显示动画 -->
+        <item name="android:windowEnterAnimation">@anim/popup_scale_in</item>
+        <!-- 消失动画 -->
+        <item name="android:windowExitAnimation">@anim/popup_scale_out</item>
+    </style>
+
+</resources>

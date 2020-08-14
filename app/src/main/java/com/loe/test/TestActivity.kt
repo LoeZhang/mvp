@@ -1,10 +1,13 @@
 package com.loe.test
 
 import android.os.Bundle
-import android.os.Handler
 import android.support.annotation.Keep
 import android.view.View.GONE
 import com.loe.mvp.*
+import com.loe.mvp.ext_app.after
+import com.loe.mvp.ext_app.setStatusBar
+import com.loe.mvp.ext_app.transOut
+import com.loe.mvp.ext_view.visible
 import com.loe.mvp.mvp.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_model.*
 
@@ -13,6 +16,7 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setStatusBar()
         setContentView(R.layout.activity_model)
 
         buttonGo.setOnClickListener()
@@ -24,7 +28,7 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
 
         buttonNew.setOnClickListener()
         {
-            start(TestListActivity::class)
+
         }
     }
 
@@ -45,7 +49,7 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
     @Keep
     fun goMain():String
     {
-        buttonNew.visibility = GONE
+        buttonNew.visible = false
         toast("11111main哒哒哒哒哒哒")
         return "傻了吧唧"
     }
@@ -55,7 +59,7 @@ class TestPresenter : BaseModelPresenter<TestModel>()
 {
     override fun onInit()
     {
-        model.same()
+//        model.same()
     }
 
     fun go()
@@ -74,10 +78,6 @@ class TestModel : BaseModel()
     {
 //        toast("goMain".invokeToString())
         "goHome".invokeToString("顺丰到付都是")
-
-        view.run()
-        {
-            finish()
-        }
+        
     }
 }

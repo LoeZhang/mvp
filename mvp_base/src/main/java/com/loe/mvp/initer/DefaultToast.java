@@ -98,7 +98,7 @@ public class DefaultToast
      */
     public void show(Object s)
     {
-        show(s + "", 1000);
+        show(s + "", 1500);
     }
 
     /**

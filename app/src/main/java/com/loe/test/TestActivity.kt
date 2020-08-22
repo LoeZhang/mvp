@@ -2,13 +2,11 @@ package com.loe.test
 
 import android.os.Bundle
 import android.support.annotation.Keep
-import android.view.View.GONE
 import com.loe.mvp.*
-import com.loe.mvp.ext_app.after
-import com.loe.mvp.ext_app.setStatusBar
-import com.loe.mvp.ext_app.transOut
+import com.loe.mvp.ext_app.*
 import com.loe.mvp.ext_view.visible
 import com.loe.mvp.mvp.BaseMvpActivity
+import com.loe.mvp.util.UIDialog
 import kotlinx.android.synthetic.main.activity_model.*
 
 class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
@@ -24,11 +22,18 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
             presenter.go()
 //            "goMain".invokeToString()
 //            model.same()
+            val f = TestFragment()
+
+            replaceFragment(frame, f)
         }
 
         buttonNew.setOnClickListener()
         {
-
+//            TestDialog(activity).show()
+            UIDialog(activity, "撒大声地").single().show()
+            {
+                it.dismiss()
+            }
         }
     }
 

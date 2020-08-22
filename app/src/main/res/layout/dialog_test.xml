@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="300dp"
+    android:background="@color/grayColor"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".TestActivity">
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/buttonGo"
@@ -21,20 +21,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="new" />
-
-    <fragment
-        android:id="@+id/fragment"
-        class="com.loe.test.TestFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        tools:layout="@layout/fragment_test" />
-
-    <FrameLayout
-        android:id="@+id/frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
-
 
 </LinearLayout>

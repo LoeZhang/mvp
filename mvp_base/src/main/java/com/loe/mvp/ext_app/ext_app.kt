@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
@@ -355,3 +356,9 @@ fun Activity?.transInBottom() = this?.overridePendingTransition(R.anim.slide_bot
 fun Activity?.transOutBottom() = this?.overridePendingTransition(R.anim.on, R.anim.slide_bottom_out)
 
 fun Activity?.transOut() = this?.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out)
+
+
+fun Context?.showToast(o: Any?)
+{
+    Toast.makeText(this, "" + o, Toast.LENGTH_SHORT).show()
+}

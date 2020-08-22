@@ -1,22 +1,18 @@
 package com.loe.mvp
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.view.Gravity
-
+import android.support.design.widget.BottomSheetDialog
+import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import com.loe.mvp.ext_app.start
 import com.loe.mvp.initer.BaseLoading
 import com.loe.mvp.initer.BaseToast
-import kotlin.reflect.KClass
 
 /**
- * Dialog基类
+ * 底部滑动Dialog基类
  */
-abstract class BaseDialog(protected val activity: Activity, private val resId: Int): BaseView
+abstract class BaseBottomDialog(protected val activity: Activity, private val resId: Int): BaseView
 {
-    protected val dialog: AlertDialog = AlertDialog.Builder(activity).create()
+    protected val dialog: BottomSheetDialog = BottomSheetDialog(activity)
     private var mToast: BaseToast = BaseToast(activity)
     private var mLoading: BaseLoading = BaseLoading(activity)
 
@@ -27,25 +23,27 @@ abstract class BaseDialog(protected val activity: Activity, private val resId: I
         set(value) = dialog.setCanceledOnTouchOutside(value)
 
     lateinit var rootView:ViewGroup
+    private var isInit = false
 
     abstract fun ViewGroup.onView()
+    fun ViewGroup.onShow(){}
 
-    fun show(gravity: Int = Gravity.BOTTOM)
+    fun show()
     {
         if (!dialog.isShowing)
         {
-            dialog.show()
-            val window = dialog.window
-            if (window != null)
+            if(!isInit)
             {
-                window!!.setContentView(resId)
-                window.setBackgroundDrawableResource(android.R.color.transparent)
-                window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                window.setGravity(gravity)
-                rootView = window.decorView as ViewGroup
+                dialog.setContentView(resId)
+                dialog.window.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.delegate.findViewById<View>(android.support.design.R.id.design_bottom_sheet)
+                    ?.setBackgroundResource(android.R.color.transparent)
+                rootView = dialog.window.decorView as ViewGroup
                 rootView.onView()
             }
+
+            dialog.show()
+            rootView.onShow()
         }
     }
 
@@ -66,9 +64,9 @@ abstract class BaseDialog(protected val activity: Activity, private val resId: I
     companion object
     {
         @JvmStatic
-        fun create(activity: Activity, resId: Int, onView: ViewGroup.() -> Unit): BaseDialog
+        fun create(activity: Activity, resId: Int, onView: ViewGroup.() -> Unit): BaseBottomDialog
         {
-            return object : BaseDialog(activity, resId)
+            return object : BaseBottomDialog(activity, resId)
             {
                 override fun ViewGroup.onView()
                 {

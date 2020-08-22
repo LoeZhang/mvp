@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-public class SpManager
+public class SPManager
 {
 	public static SharedPreferences sp;
 
@@ -40,7 +40,7 @@ public class SpManager
 	{
 		Editor editor = sp.edit();
 		editor.putString(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/** 获取存储整数 */
@@ -60,7 +60,7 @@ public class SpManager
 	{
 		Editor editor = sp.edit();
 		editor.putInt(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/** 获取存储长整数 */
@@ -74,7 +74,7 @@ public class SpManager
 	{
 		Editor editor = sp.edit();
 		editor.putLong(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/** 获取存储小数 */
@@ -88,7 +88,7 @@ public class SpManager
 	{
 		Editor editor = sp.edit();
 		editor.putFloat(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/** 获取存储双小数 */
@@ -102,7 +102,7 @@ public class SpManager
 	{
 		Editor editor = sp.edit();
 		editor.putString(key, value+"");
-		editor.commit();
+		editor.apply();
 	}
 
 	/** 获取存储布尔值 */
@@ -116,13 +116,13 @@ public class SpManager
 	{
 		Editor editor = sp.edit();
 		editor.putBoolean(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	public static void clear()
 	{
 		Editor editor = sp.edit();
 		editor.clear();
-		editor.commit();
+		editor.apply();
 	}
 }

@@ -3,11 +3,12 @@ package com.loe.mvp
 import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MotionEvent
 import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.BaseLoading
 import com.loe.mvp.initer.BaseToast
 
-open class BaseActivity: AppCompatActivity(), BaseView
+open class BaseActivity : AppCompatActivity(), BaseView
 {
     lateinit var activity: Activity
     private lateinit var mToast: BaseToast
@@ -31,6 +32,12 @@ open class BaseActivity: AppCompatActivity(), BaseView
     {
         super.onResume()
         BaseIniter.onBaseView?.onResume(this)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean
+    {
+        if (ev != null) BaseIniter.onBaseView?.onTouchEvent(ev)
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun onDestroy()

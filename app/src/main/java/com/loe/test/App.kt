@@ -2,7 +2,9 @@ package com.loe.test
 
 import android.app.Activity
 import android.app.Application
+import android.view.MotionEvent
 import android.widget.Toast
+import com.loe.mvp.ext_app.px
 import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.OnBaseView
 import org.greenrobot.eventbus.EventBus
@@ -75,6 +77,32 @@ class App : Application()
             override fun onDestroy(o: Any)
             {
                 EventBus.getDefault().unregister(o)
+            }
+
+            private var touchCount = 1
+            private var lastTouchTime = 0L
+
+            override fun onTouchEvent(ev: MotionEvent)
+            {
+                if (ev?.action == MotionEvent.ACTION_DOWN)
+                {
+                    if (System.currentTimeMillis() - lastTouchTime < 800)
+                    {
+                        touchCount++
+                        if (touchCount == 3 && ev?.rawY < px(100))
+                        {
+//                            LoeLogger.toLogger(activity)
+                        }
+                    } else
+                    {
+                        touchCount = 1
+                    }
+                    lastTouchTime = System.currentTimeMillis()
+                }
+                if (ev?.action == MotionEvent.ACTION_MOVE)
+                {
+                    touchCount = 0
+                }
             }
         })
     }

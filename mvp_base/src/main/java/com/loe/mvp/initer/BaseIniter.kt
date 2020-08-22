@@ -1,5 +1,7 @@
 package com.loe.mvp.initer
 
+import android.view.MotionEvent
+
 
 /**
  * BaseView初始化器
@@ -22,7 +24,9 @@ interface OnBaseView
 {
     fun onCreate(o: Any)
 
-    fun onResume(o: Any)
+    fun onResume(o: Any){}
+
+    fun onTouchEvent(ev: MotionEvent){}
 
     fun onDestroy(o: Any)
 }

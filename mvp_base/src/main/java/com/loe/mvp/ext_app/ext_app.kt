@@ -286,6 +286,11 @@ fun <T> RecyclerView.setQuickAdapter(layoutId: Int, list: List<T> = ArrayList(),
 /**
  * 其他
  */
+fun px(dp: Double): Int
+{
+    return (dp * Resources.getSystem().displayMetrics.density).toInt()
+}
+
 fun px(dp: Int): Int
 {
     return (dp * Resources.getSystem().displayMetrics.density).toInt()

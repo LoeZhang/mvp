@@ -1,17 +1,27 @@
 package com.loe.test
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.loe.mvp.ext_app.addOnItemChildClickListener
 import com.loe.mvp.ext_app.addOnItemClickListener
+import com.loe.mvp.ext_app.createAdapter
+import com.loe.mvp.ext_java.AsyncTimer
+import com.loe.mvp.ext_java.delay
+import com.loe.mvp.ext_java.timer
 import com.loe.mvp.list.BaseListActivity
+import com.loe.mvp.list.QuickAdapter
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.list_item.view.*
 
 class TestListActivity : BaseListActivity<String>()
 {
     private var page = 1
+
+    lateinit var time: AsyncTimer
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -19,13 +29,22 @@ class TestListActivity : BaseListActivity<String>()
         setContentView(R.layout.activity_list)
 
         // 初始化列表
-        init(recyclerView, refreshLayout, true)
+        init(recyclerView, refreshLayout)
 
         initView()
 
         loadData(true)
         // 主动显示refreshLayout的刷新动画
         refresh()
+
+        time = timer(1000, 1000)
+        {
+            Logger.d(System.currentTimeMillis())
+        }
+        delay(5000)
+        {
+            Logger.d("" + this@TestListActivity + " : " + System.currentTimeMillis())
+        }
     }
 
     override fun initView()
@@ -43,19 +62,19 @@ class TestListActivity : BaseListActivity<String>()
         buttonAdd.setOnClickListener()
         {
             // 通过adapter操作列表数据
-            adapter.remove(1)
+            list.remove(1)
         }
 
         // item点击事件
         recyclerView.addOnItemClickListener()
         {
-            toast(adapter.getItem(it))
+            toast(list[it])
         }
 
         // item内按钮的事件
         recyclerView.addOnItemChildClickListener(R.id.button)
         {
-            toast(adapter.getItem(it) + "按钮")
+            toast(list[it] + "按钮")
         }
     }
 
@@ -70,6 +89,7 @@ class TestListActivity : BaseListActivity<String>()
         recyclerView.postDelayed({
             ////////////////////////// 模拟页面数据 //////////////////////////
             val list = ArrayList<String>()
+            list.forEach {  }
             when (page)
             {
                 1 -> for (i in 1..15) list.add(i.toString() + Math.random().toString())
@@ -88,16 +108,14 @@ class TestListActivity : BaseListActivity<String>()
      * 可以通过createAdapter扩展方法简单创建
      * 如果多个页面需要用到此adapter，可单独创建一个adapter文件类
      */
-    override fun getListAdapter() = object : BaseQuickAdapter<String, BaseViewHolder>
-    (R.layout.activity_list_item, ArrayList())
-    {
-        override fun convert(holder: BaseViewHolder, s: String)
-        {
+    override fun getListAdapter() = createAdapter<String>(R.layout.activity_list_item)
+    { holder, s ->
+
             // item绑定逻辑
-            holder.setText(R.id.textName, s)
+//            holder.setText(R.id.textName, s)
+            textName.text = s
 
             // 注册item内按钮的事件，再用recyclerView.addOnItemChildClickListener(id)监听
             holder.addOnClickListener(R.id.button)
-        }
     }
 }

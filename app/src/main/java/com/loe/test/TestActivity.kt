@@ -1,9 +1,12 @@
 package com.loe.test
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.Keep
 import com.loe.mvp.*
 import com.loe.mvp.ext_app.*
+import com.loe.mvp.ext_java.delay
 import com.loe.mvp.ext_view.visible
 import com.loe.mvp.mvp.BaseMvpActivity
 import com.loe.mvp.util.UIDialog
@@ -30,10 +33,12 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
         buttonNew.setOnClickListener()
         {
 //            TestDialog(activity).show()
-            UIDialog(activity, "撒大声地").single().show()
-            {
-                it.dismiss()
-            }
+//            UIDialog(activity, "撒大声地").single().show()
+//            {
+//                it.dismiss()
+//            }
+
+            start(TestListActivity::class)
         }
     }
 

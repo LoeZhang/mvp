@@ -19,13 +19,12 @@ import com.loe.mvp.R
  * @author zls
  * @since 2020/7/3-9:30
  */
-abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
-    BaseQuickAdapter.RequestLoadMoreListener
+abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener
 {
     private lateinit var activity: Activity
 
     private var size: Int = 10
-    lateinit var adapter: BaseQuickAdapter<BEAN, *>
+    lateinit var adapter: QuickAdapter<BEAN>
 
     private var isEnableLoad = true
 
@@ -143,7 +142,7 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
         }
     }
 
-    protected abstract fun getListAdapter(): BaseQuickAdapter<BEAN, *>
+    protected abstract fun getListAdapter(): QuickAdapter<BEAN>
 
     fun setRefreshing(refreshing: Boolean)
     {
@@ -173,6 +172,26 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
             loadData(false)
         }, 400)
     }
+
+    operator fun get(i: Int): BEAN = adapter.getItem(i)!!
+
+    operator fun set(i: Int, bean: BEAN) = adapter.setData(i, bean)
+
+    inline fun forEach(action: (BEAN) -> Unit) = adapter.data.forEach(action)
+
+    inline fun forEachIndexed(action: (Int, BEAN) -> Unit) = adapter.data.forEachIndexed(action)
+
+    fun add(bean: BEAN) = adapter.addData(bean)
+
+    fun add(bList: List<BEAN>) = adapter.addData(bList)
+
+    fun add(i: Int, bean: BEAN) = adapter.addData(i, bean)
+
+    fun add(i: Int, bList: List<BEAN>) = adapter.addData(i, bList)
+
+    fun remove(i: Int) = adapter.remove(i)
+
+    val data = adapter.data
 
     companion object
     {

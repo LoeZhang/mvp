@@ -37,13 +37,15 @@ val Int?.string: String
     get() = this?.toString() ?: ""
 
 val Double?.string: String
-    get() {
+    get()
+    {
         if (this != null && this - this.toLong() == 0.0) return this.toLong().toString()
         return this?.toString() ?: ""
     }
 
 val Float?.string: String
-    get() {
+    get()
+    {
         if (this != null && this - this.toLong() == 0f) return this.toLong().toString()
         return this?.toString() ?: ""
     }
@@ -54,18 +56,23 @@ val Long?.string: String
 val Boolean?.string: String
     get() = this?.toString() ?: ""
 
-inline fun safe(run: () -> Unit) {
-    try {
+inline fun safe(run: () -> Unit)
+{
+    try
+    {
         run()
-    } catch (e: Exception) {
+    } catch (e: Exception)
+    {
         Log.e("AndroidRuntime", "" + e)
     }
 }
 
 fun delay(delay: Long = 0, callBack: () -> Unit): DelayTask
 {
-    val task = object : DelayTask(delay) {
-        override fun run() {
+    val task = object : DelayTask(delay)
+    {
+        override fun run()
+        {
             callBack()
         }
     }
@@ -80,8 +87,10 @@ fun timer(
     callBack: () -> Unit
 ): AsyncTimer
 {
-    val task = object : AsyncTimer(delay, period, times) {
-        override fun run() {
+    val task = object : AsyncTimer(delay, period, times)
+    {
+        override fun run()
+        {
             callBack()
         }
     }
@@ -97,11 +106,13 @@ val String.i: String get() = "<i>$this</i>"
 
 val String.u: String get() = "<u>$this</u>"
 
-fun String.c(c: String): String {
+fun String.c(c: String): String
+{
     return "<font color='$c'>$this</font>"
 }
 
-fun String.s(s: Int): String {
+fun String.s(s: Int): String
+{
     return "<font size='$s'>$this</font>"
 }
 
@@ -112,34 +123,42 @@ val String.blue: String get() = c("#5084fe")
 val String.html: Spanned get() = Html.fromHtml(this)
 
 val String.phone: String
-    get() = try {
+    get() = try
+    {
         this.substring(0, 3) + "****" + this.substring(7)
-    } catch (e: Exception) {
+    } catch (e: Exception)
+    {
         this
     }
 
 val String.card: String
-    get() = try {
+    get() = try
+    {
         this.substring(0, 5) + "*********" + this.substring(14)
-    } catch (e: Exception) {
+    } catch (e: Exception)
+    {
         this
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-abstract class DelayTask(var delay: Long) : Handler(Looper.getMainLooper()) {
-
+abstract class DelayTask(var delay: Long) : Handler(Looper.getMainLooper())
+{
     private var runnable = Runnable { this@DelayTask.run() }
 
-    fun start() {
-        if (delay == 0L) {
+    fun start()
+    {
+        if (delay == 0L)
+        {
             post(runnable)
-        } else {
+        } else
+        {
             postDelayed(runnable, delay)
         }
     }
 
-    fun stop() {
+    fun stop()
+    {
         removeCallbacks(runnable)
     }
 
@@ -150,42 +169,60 @@ abstract class AsyncTimer(
     private val mDelay: Long,
     private val mPeriod: Long,
     private var mLastTime: Long = java.lang.Long.MAX_VALUE
-):Timer() {
+) : Timer()
+{
     private var mTimes: Long = 0
 
     private var mTask: TimerTask? = null
 
-    protected var mHandler: Handler = object : Handler(Looper.getMainLooper()) {
-        override fun handleMessage(msg: Message) {
-            run()
+    companion object
+    {
+        protected var mHandler: Handler = object : Handler(Looper.getMainLooper())
+        {
+            override fun handleMessage(msg: Message)
+            {
+                val timer = msg.obj as AsyncTimer
+                timer.run()
+            }
         }
     }
 
-    fun start() {
-        try {
+    fun start()
+    {
+        try
+        {
             mTimes = mLastTime
-            mTask = object : TimerTask() {
-                override fun run() {
-                    if (mTimes > 0) {
-                        mHandler.sendEmptyMessage(0)
+            mTask = object : TimerTask()
+            {
+                override fun run()
+                {
+                    if (mTimes > 0)
+                    {
+                        val msg = Message()
+                        msg.obj = this@AsyncTimer
+                        mHandler.sendMessage(msg)
                         mTimes--
                     }
                 }
             }
             schedule(mTask, mDelay, mPeriod)
-        } catch (e: Exception) {
+        } catch (e: Exception)
+        {
         }
     }
 
-    fun stop() {
+    fun stop()
+    {
         mLastTime = mTimes
         mTimes = 0
-        if (mTask != null) {
+        if (mTask != null)
+        {
             mTask!!.cancel()
         }
     }
 
-    fun finish() {
+    fun finish()
+    {
         stop()
         cancel()
     }

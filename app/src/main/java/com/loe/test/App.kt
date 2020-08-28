@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.view.MotionEvent
 import android.widget.Toast
+import com.loe.logger.LoeLogger
 import com.loe.mvp.ext_app.px
 import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.OnBaseView
@@ -62,6 +63,10 @@ class App : Application()
 //            }
 //        })
 
+
+
+        LoeLogger.init(this, false)
+
         BaseIniter.init(object : OnBaseView
         {
             override fun onCreate(o: Any)
@@ -84,14 +89,14 @@ class App : Application()
 
             override fun onTouchEvent(ev: MotionEvent)
             {
-                if (ev?.action == MotionEvent.ACTION_DOWN)
+                if (ev.action == MotionEvent.ACTION_DOWN)
                 {
                     if (System.currentTimeMillis() - lastTouchTime < 800)
                     {
                         touchCount++
-                        if (touchCount == 3 && ev?.rawY < px(100))
+                        if (touchCount == 3 && ev.rawY < px(100))
                         {
-//                            LoeLogger.toLogger(activity)
+                            LoeLogger.toLogger(this@App)
                         }
                     } else
                     {
@@ -99,7 +104,7 @@ class App : Application()
                     }
                     lastTouchTime = System.currentTimeMillis()
                 }
-                if (ev?.action == MotionEvent.ACTION_MOVE)
+                if (ev.action == MotionEvent.ACTION_MOVE)
                 {
                     touchCount = 0
                 }

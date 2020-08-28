@@ -153,7 +153,7 @@ object PermissionUtil
                 val deniedList = ArrayList<String>()
                 grantResults.forEachIndexed()
                 { i, grant ->
-                    if (grant != PackageManager.PERMISSION_DENIED)
+                    if (grant == PackageManager.PERMISSION_DENIED)
                     {
                         deniedList.add(permissions[i])
                     }

@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.os.Build
 import android.os.Handler
+import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
@@ -25,6 +26,7 @@ import com.chad.library.adapter.base.listener.OnItemChildLongClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.listener.OnItemLongClickListener
 import com.loe.mvp.R
+import com.loe.mvp.list.QuickAdapter
 import com.loe.mvp.util.ResultUtil
 import kotlin.reflect.KClass
 
@@ -260,27 +262,21 @@ fun RecyclerView.addFooterView(view: View, index: Int)
     (adapter as BaseQuickAdapter<*, *>).addFooterView(view, index)
 }
 
-fun <T> createAdapter(layoutId: Int, list: List<T> = ArrayList(), convert: (holder: BaseViewHolder, bean: T) -> Unit): BaseQuickAdapter<T, BaseViewHolder>
+fun <T> createAdapter(@LayoutRes layoutResId: Int, list: List<T> = ArrayList(), convert: View.(holder: BaseViewHolder, bean: T) -> Unit): QuickAdapter<T>
 {
-    return object : BaseQuickAdapter<T, BaseViewHolder>(layoutId, list)
+    return object : QuickAdapter<T>(layoutResId, list)
     {
-        override fun convert(holder: BaseViewHolder, bean: T)
+        override fun View.convert(holder: BaseViewHolder, bean: T)
         {
             convert(holder, bean)
         }
     }
 }
 
-fun <T> RecyclerView.setQuickAdapter(layoutId: Int, list: List<T> = ArrayList(), convert: (holder: BaseViewHolder, bean: T) -> Unit): BaseQuickAdapter<T, BaseViewHolder>
+fun <T> RecyclerView.setQuickAdapter(@LayoutRes layoutResId: Int, list: List<T> = ArrayList(), convert: View.(holder: BaseViewHolder, bean: T) -> Unit): QuickAdapter<T>
 {
-    adapter = object : BaseQuickAdapter<T, BaseViewHolder>(layoutId, list)
-    {
-        override fun convert(holder: BaseViewHolder, bean: T)
-        {
-            convert(holder, bean)
-        }
-    }
-    return adapter as BaseQuickAdapter<T, BaseViewHolder>
+    adapter = createAdapter(layoutResId, list, convert)
+    return adapter as QuickAdapter<T>
 }
 
 /**

@@ -16,10 +16,10 @@ open class BaseActivity : AppCompatActivity(), BaseView
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
+        super.onCreate(savedInstanceState)
         activity = this
         mToast = BaseToast(activity)
         mLoading = BaseLoading(activity)
-        super.onCreate(savedInstanceState)
 
         BaseIniter.onBaseView?.onCreate(this)
     }

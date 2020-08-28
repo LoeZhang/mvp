@@ -3,12 +3,11 @@ package com.loe.mvp.list
 import android.support.annotation.Keep
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.loe.mvp.BaseActivity
 
 abstract class BaseListActivity<BEAN> : BaseActivity()
 {
-    var listController = object: ListController<BEAN>()
+    var list = object: ListController<BEAN>()
     {
         override fun loadData(isRefresh: Boolean) = this@BaseListActivity.loadData(isRefresh)
 
@@ -17,32 +16,32 @@ abstract class BaseListActivity<BEAN> : BaseActivity()
 
     fun init(recyclerView: RecyclerView?, refreshLayout: SwipeRefreshLayout? = null, isEnableLoad: Boolean = true)
     {
-        listController.init(activity, recyclerView, refreshLayout, isEnableLoad)
+        list.init(activity, recyclerView, refreshLayout, isEnableLoad)
     }
 
-    protected val adapter get() = listController.adapter
+    protected val adapter get() = list.adapter
 
     /**
      * 主动显示refreshLayout的刷新动画
      */
-    protected fun refresh() = listController.refresh()
+    protected fun refresh() = list.refresh()
 
     /**
      * 加载完成调用
      */
-    fun loadOk(isRefresh: Boolean, aList: List<BEAN>) = listController.loadOk(isRefresh, aList)
+    fun loadOk(isRefresh: Boolean, aList: List<BEAN>) = list.loadOk(isRefresh, aList)
 
     /**
      * 加载失败调用
      */
     @Keep
-    override fun loadError(isRefresh: Boolean) = listController.loadError(isRefresh)
+    override fun loadError(isRefresh: Boolean) = list.loadError(isRefresh)
 
     /**
      * 设置refreshLayout刷新状态
      */
     @Keep
-    override fun setRefreshing(refreshing: Boolean) = listController.setRefreshing(refreshing)
+    override fun setRefreshing(refreshing: Boolean) = list.setRefreshing(refreshing)
 
     /**
      * 加载列表数据
@@ -54,5 +53,5 @@ abstract class BaseListActivity<BEAN> : BaseActivity()
     /**
      * 获取列表Adapter
      */
-    protected abstract fun getListAdapter(): BaseQuickAdapter<BEAN, *>
+    protected abstract fun getListAdapter(): QuickAdapter<BEAN>
 }

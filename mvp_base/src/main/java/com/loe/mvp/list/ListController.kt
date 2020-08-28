@@ -19,7 +19,8 @@ import com.loe.mvp.R
  * @author zls
  * @since 2020/7/3-9:30
  */
-abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener
+abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
+    BaseQuickAdapter.RequestLoadMoreListener
 {
     private lateinit var activity: Activity
 
@@ -69,8 +70,10 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener, Base
         empty.text = "暂无数据"
         empty.setTextColor(Color.parseColor("#aaaaaa"))
         empty.textSize = 13f
-        empty.setPadding(0,
-            dp_Px(125), 0, dp_Px(20))
+        empty.setPadding(
+            0,
+            dp_Px(125), 0, dp_Px(20)
+        )
         empty.gravity = Gravity.CENTER_HORIZONTAL
         adapter.emptyView = empty
     }
@@ -191,7 +194,13 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener, Base
 
     fun remove(i: Int) = adapter.remove(i)
 
-    val data = adapter.data
+    fun notifyItemChanged(i: Int) = adapter.notifyItemChanged(i)
+
+    fun notifyDataSetChanged() = adapter.notifyDataSetChanged()
+
+    var data
+        get() = adapter.data
+        set(value) = adapter.setNewData(value)
 
     companion object
     {

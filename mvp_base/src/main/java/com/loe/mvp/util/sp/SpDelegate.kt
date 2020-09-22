@@ -144,7 +144,7 @@ open class SpDelegate
 
     /***************************** 属性委托  ***************************/
 
-    fun string(def: String = "") = object : ReadWriteProperty<SpDelegate, String>
+    inline fun string(def: String = "") = object : ReadWriteProperty<SpDelegate, String>
     {
         override fun getValue(thisRef: SpDelegate, property: KProperty<*>): String
         {
@@ -157,7 +157,7 @@ open class SpDelegate
         }
     }
 
-    fun int(def: Int = 0) = object : ReadWriteProperty<SpDelegate, Int>
+    inline fun int(def: Int = 0) = object : ReadWriteProperty<SpDelegate, Int>
     {
 
         override fun getValue(thisRef: SpDelegate, property: KProperty<*>): Int
@@ -171,7 +171,7 @@ open class SpDelegate
         }
     }
 
-    fun long(def: Long = 0L) = object : ReadWriteProperty<SpDelegate, Long>
+    inline fun long(def: Long = 0L) = object : ReadWriteProperty<SpDelegate, Long>
     {
 
         override fun getValue(thisRef: SpDelegate, property: KProperty<*>): Long
@@ -185,7 +185,7 @@ open class SpDelegate
         }
     }
 
-    fun float(def: Float = 0.0f) = object : ReadWriteProperty<SpDelegate, Float>
+    inline fun float(def: Float = 0.0f) = object : ReadWriteProperty<SpDelegate, Float>
     {
         override fun getValue(thisRef: SpDelegate, property: KProperty<*>): Float
         {
@@ -198,7 +198,7 @@ open class SpDelegate
         }
     }
 
-    fun double(def: Double = 0.0) = object : ReadWriteProperty<SpDelegate, Double>
+    inline fun double(def: Double = 0.0) = object : ReadWriteProperty<SpDelegate, Double>
     {
         override fun getValue(thisRef: SpDelegate, property: KProperty<*>): Double
         {
@@ -211,7 +211,7 @@ open class SpDelegate
         }
     }
 
-    fun boolean(def: Boolean = false) = object : ReadWriteProperty<SpDelegate, Boolean>
+    inline fun boolean(def: Boolean = false) = object : ReadWriteProperty<SpDelegate, Boolean>
     {
         override fun getValue(thisRef: SpDelegate, property: KProperty<*>): Boolean
         {

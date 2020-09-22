@@ -14,6 +14,8 @@ import android.widget.EditText
 import android.widget.TextView
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 var View?.visible: Boolean
     get() = if (this != null) this.visibility == View.VISIBLE else false
@@ -219,4 +221,58 @@ internal abstract class DelayTask(var delay: Long) : Handler(Looper.getMainLoope
     }
 
     protected abstract fun run()
+}
+
+/**
+ * 委托绑定
+ */
+fun bindString(getter: () -> TextView) = object : ReadWriteProperty<Any, String>
+{
+    override fun getValue(thisRef: Any, property: KProperty<*>): String
+    {
+        return getter().text.toString()
+    }
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: String)
+    {
+        getter().text = value
+    }
+}
+
+fun bindInt(getter: () -> TextView) = object : ReadWriteProperty<Any, Int>
+{
+    override fun getValue(thisRef: Any, property: KProperty<*>): Int
+    {
+        return try
+        {
+            getter().text.toString().toInt()
+        }catch (e: java.lang.Exception)
+        {
+            0
+        }
+    }
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: Int)
+    {
+        getter().text = value.toString()
+    }
+}
+
+fun bindDouble(getter: () -> TextView) = object : ReadWriteProperty<Any, Double>
+{
+    override fun getValue(thisRef: Any, property: KProperty<*>): Double
+    {
+        return try
+        {
+            getter().text.toString().toDouble()
+        }catch (e: java.lang.Exception)
+        {
+            0.0
+        }
+    }
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: Double)
+    {
+        getter().text = value.toString()
+    }
 }

@@ -27,6 +27,8 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
 //            model.same()
             val f = TestFragment()
 
+
+
             replaceFragment(frame, f)
         }
 

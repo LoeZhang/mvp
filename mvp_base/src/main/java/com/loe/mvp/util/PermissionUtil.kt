@@ -45,6 +45,7 @@ object PermissionUtil
             builder.setPositiveButton("设置", null)
             builder.setNegativeButton("取消")
             { dialog, which ->
+                dialog.dismiss()
                 if(isFinish) activity.finish()
             }
             val dialog = builder.create()

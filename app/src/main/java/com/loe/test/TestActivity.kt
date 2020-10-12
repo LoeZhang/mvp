@@ -6,6 +6,7 @@ import android.os.Handler
 import android.support.annotation.Keep
 import com.loe.mvp.*
 import com.loe.mvp.ext_app.*
+import com.loe.mvp.ext_java.bindString
 import com.loe.mvp.ext_java.delay
 import com.loe.mvp.ext_view.visible
 import com.loe.mvp.mvp.BaseMvpActivity
@@ -14,6 +15,8 @@ import kotlinx.android.synthetic.main.activity_model.*
 
 class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
 {
+    var goText by bindString { buttonGo }
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)

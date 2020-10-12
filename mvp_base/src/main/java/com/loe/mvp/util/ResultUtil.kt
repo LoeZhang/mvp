@@ -70,13 +70,31 @@ object ResultUtil
     }
 
     class ResultBean(
-            var code: Int,
-            var data: Intent?
+        var code: Int,
+        var data: Intent?
     )
     {
         fun isOk(): Boolean
         {
             return code == RESULT_OK
+        }
+
+        inline fun ok(on: () -> Unit): ResultBean
+        {
+            if (isOk())
+            {
+                on()
+            }
+            return this
+        }
+
+        inline fun cancel(on: () -> Unit): ResultBean
+        {
+            if (!isOk())
+            {
+                on()
+            }
+            return this
         }
 
         fun getUri(): Uri?

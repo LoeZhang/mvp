@@ -12,6 +12,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
+import com.chad.library.adapter.base.BaseViewHolder
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.properties.ReadWriteProperty
@@ -204,21 +205,30 @@ fun TextView.addTextAfterListener(delay: Long, after: (s: String) -> Unit)
     }
 }
 
-internal abstract class DelayTask(var delay: Long) : Handler(Looper.getMainLooper()) {
-
+internal abstract class DelayTask(var delay: Long) : Handler(Looper.getMainLooper())
+{
     private var runnable = Runnable { this@DelayTask.run() }
 
-    fun start() {
-        if (delay == 0L) {
+    fun start()
+    {
+        if (delay == 0L)
+        {
             post(runnable)
-        } else {
+        } else
+        {
             postDelayed(runnable, delay)
         }
     }
 
-    fun stop() {
+    fun stop()
+    {
         removeCallbacks(runnable)
     }
 
     protected abstract fun run()
+}
+
+fun BaseViewHolder.addOnClickView(vararg views: View)
+{
+    addOnClickListener(*(views.map { it.id }.toIntArray()))
 }

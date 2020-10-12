@@ -30,6 +30,6 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1'
 
     implementation project(':mvp_base')
-    implementation 'com.github.LoeZhang:logger:0.1.1'
+    implementation 'com.github.LoeZhang:logger:0.1.2'
 //    implementation 'com.github.LoeZhang:mvp:0.4.1'
 }

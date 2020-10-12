@@ -5,6 +5,7 @@ import android.app.Application
 import android.view.MotionEvent
 import android.widget.Toast
 import com.loe.logger.LoeLogger
+import com.loe.logger.util.LoeDoubleTouch
 import com.loe.mvp.ext_app.px
 import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.OnBaseView
@@ -84,30 +85,11 @@ class App : Application()
                 EventBus.getDefault().unregister(o)
             }
 
-            private var touchCount = 1
-            private var lastTouchTime = 0L
+            private var doubleTouch = LoeDoubleTouch(applicationContext)
 
-            override fun onTouchEvent(ev: MotionEvent)
+            override fun onTouchEvent(e: MotionEvent)
             {
-                if (ev.action == MotionEvent.ACTION_DOWN)
-                {
-                    if (System.currentTimeMillis() - lastTouchTime < 800)
-                    {
-                        touchCount++
-                        if (touchCount == 3 && ev.rawY < px(100))
-                        {
-                            LoeLogger.toLogger(this@App)
-                        }
-                    } else
-                    {
-                        touchCount = 1
-                    }
-                    lastTouchTime = System.currentTimeMillis()
-                }
-                if (ev.action == MotionEvent.ACTION_MOVE)
-                {
-                    touchCount = 0
-                }
+                doubleTouch.dispatchTouchEvent(e)
             }
         })
     }

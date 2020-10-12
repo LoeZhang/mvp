@@ -11,11 +11,12 @@ import com.loe.mvp.ext_app.createAdapter
 import com.loe.mvp.ext_java.AsyncTimer
 import com.loe.mvp.ext_java.delay
 import com.loe.mvp.ext_java.timer
+import com.loe.mvp.ext_view.addOnClickView
 import com.loe.mvp.list.BaseListActivity
 import com.loe.mvp.list.QuickAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_list.*
-import kotlinx.android.synthetic.main.list_item.view.*
+import kotlinx.android.synthetic.main.activity_list_item.*
 
 class TestListActivity : BaseListActivity<String>()
 {
@@ -116,6 +117,6 @@ class TestListActivity : BaseListActivity<String>()
             textName.text = s
 
             // 注册item内按钮的事件，再用recyclerView.addOnItemChildClickListener(id)监听
-            holder.addOnClickListener(R.id.button)
+            holder.addOnClickView(button, textName)
     }
 }

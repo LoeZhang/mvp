@@ -41,4 +41,6 @@
     <color name="pink">#f69ed3</color>
 
     <color name="greenDeep">#19A500</color>
+
+    <color name="progress">#ffffff</color>
 </resources>

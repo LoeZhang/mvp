@@ -21,7 +21,7 @@
         <ProgressBar
             style="@style/Base.Widget.AppCompat.ProgressBar"
             android:layout_width="19dp"
-            android:indeterminateTint="#f66"
+            android:indeterminateTint="@color/progress"
             android:layout_height="19dp"/>
 
         <TextView

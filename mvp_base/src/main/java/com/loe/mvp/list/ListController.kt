@@ -84,6 +84,14 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
         refreshLayout?.isRefreshing = true
     }
 
+    fun refreshAuto()
+    {
+        if(adapter.data.isEmpty())
+        {
+            refresh()
+        }
+    }
+
     abstract fun loadData(isRefresh: Boolean)
 
     /**

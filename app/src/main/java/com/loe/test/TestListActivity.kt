@@ -56,9 +56,9 @@ class TestListActivity : BaseListActivity<String>()
         adapter.addHeaderView(header)
 
         // 添加空白页
-        val empty = TextView(activity)
-        empty.text = "暂无数据"
-        adapter.emptyView = empty
+//        val empty = TextView(activity)
+//        empty.text = "暂无数据"
+//        adapter.emptyView = empty
 
         buttonAdd.setOnClickListener()
         {
@@ -101,7 +101,7 @@ class TestListActivity : BaseListActivity<String>()
             // 加载完成后调用loadOk()结束加载，如果加载出错，调用loadError()结束加载
             loadOk(isRefresh, list)
             page++
-        }, 2000)
+        }, 5000)
     }
 
     /**
@@ -114,9 +114,9 @@ class TestListActivity : BaseListActivity<String>()
 
             // item绑定逻辑
 //            holder.setText(R.id.textName, s)
-            textName.text = s
+//            textName.text = s
 
             // 注册item内按钮的事件，再用recyclerView.addOnItemChildClickListener(id)监听
-            holder.addOnClickView(button, textName)
+//            holder.addOnClickView(button, textName)
     }
 }

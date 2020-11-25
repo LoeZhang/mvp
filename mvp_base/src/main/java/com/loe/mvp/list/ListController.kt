@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.loe.mvp.R
 
@@ -66,16 +67,7 @@ abstract class ListController<BEAN> : SwipeRefreshLayout.OnRefreshListener,
         adapter.setHeaderFooterEmpty(true, true)
 
         // 空白页
-        val empty = TextView(activity)
-        empty.text = "暂无数据"
-        empty.setTextColor(Color.parseColor("#aaaaaa"))
-        empty.textSize = 13f
-        empty.setPadding(
-            0,
-            dp_Px(125), 0, dp_Px(20)
-        )
-        empty.gravity = Gravity.CENTER_HORIZONTAL
-        adapter.emptyView = empty
+        adapter.emptyView = View.inflate(activity, R.layout.layout_list_empty, null)
     }
 
     fun refresh()

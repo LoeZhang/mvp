@@ -15,8 +15,8 @@ class Popuper
 constructor(
         context: Context,
         layoutResId: Int,
-        width: Int = WRAP_CONTENT,
-        height: Int = MATCH_PARENT
+        width: Int = MATCH_PARENT,
+        height: Int = WRAP_CONTENT
 )
 {
     companion object
@@ -25,8 +25,8 @@ constructor(
         const val MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT
     }
 
-    private val popupWindow: PopupWindow
-    private val root: ViewGroup =
+    val popupWindow: PopupWindow
+    val root: ViewGroup =
         LayoutInflater.from(context).inflate(layoutResId, null) as ViewGroup
 
     private var canShow = true
@@ -111,6 +111,11 @@ constructor(
     fun setOutsideTouchable(touchable: Boolean)
     {
         popupWindow.isOutsideTouchable = touchable
+    }
+
+    fun setCancelView(resId: Int)
+    {
+        root.findViewById<View>(resId).setOnClickListener { dismiss() }
     }
 
     fun getView(resId: Int): View

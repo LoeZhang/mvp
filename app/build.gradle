@@ -31,5 +31,5 @@ dependencies {
 
     implementation project(':mvp_base')
     implementation 'com.github.LoeZhang:logger:0.1.2'
-//    implementation 'com.github.LoeZhang:mvp:0.4.1'
+//    implementation 'com.github.LoeZhang:mvp:0.6.7'
 }

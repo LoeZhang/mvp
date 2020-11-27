@@ -10,6 +10,7 @@ import com.loe.mvp.ext_java.bindString
 import com.loe.mvp.ext_java.delay
 import com.loe.mvp.ext_view.visible
 import com.loe.mvp.mvp.BaseMvpActivity
+import com.loe.mvp.util.Popuper
 import com.loe.mvp.util.UIDialog
 import kotlinx.android.synthetic.main.activity_model.*
 
@@ -45,6 +46,8 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
 
             start(TestListActivity::class)
         }
+
+        val popuper = Popuper(activity, R.layout.layout_list_empty)
     }
 
     override fun initView()

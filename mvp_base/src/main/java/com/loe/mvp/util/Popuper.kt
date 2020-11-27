@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
+
+const val WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT
+const val MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT
 
 class Popuper
 @JvmOverloads
@@ -19,15 +21,8 @@ constructor(
         height: Int = WRAP_CONTENT
 )
 {
-    companion object
-    {
-        const val WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT
-        const val MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT
-    }
-
     val popupWindow: PopupWindow
-    val root: ViewGroup =
-        LayoutInflater.from(context).inflate(layoutResId, null) as ViewGroup
+    val root: ViewGroup = View.inflate(context, layoutResId, null) as ViewGroup
 
     private var canShow = true
 
@@ -68,6 +63,11 @@ constructor(
             }
             false
         })
+    }
+
+    fun run(block: ViewGroup.() -> Unit)
+    {
+        root.block()
     }
 
     fun show(anchor: View)
@@ -113,9 +113,19 @@ constructor(
         popupWindow.isOutsideTouchable = touchable
     }
 
+    fun setRootCancel()
+    {
+        root.setOnClickListener { dismiss() }
+    }
+
     fun setCancelView(resId: Int)
     {
         root.findViewById<View>(resId).setOnClickListener { dismiss() }
+    }
+
+    operator fun get(resId: Int): View
+    {
+        return root.findViewById(resId)
     }
 
     fun getView(resId: Int): View

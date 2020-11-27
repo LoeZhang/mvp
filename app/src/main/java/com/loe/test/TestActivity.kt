@@ -18,11 +18,17 @@ class TestActivity : BaseMvpActivity<TestPresenter, TestModel>()
 {
     var goText by bindString { buttonGo }
 
+    var param = ""
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setStatusBar()
         setContentView(R.layout.activity_model)
+
+        param = intent.getStringExtra("param") ?: ""
+
+        buttonGo.text = buttonGo.text.toString() + param
 
         buttonGo.setOnClickListener()
         {

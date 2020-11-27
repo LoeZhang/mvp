@@ -30,6 +30,7 @@ abstract class BaseDialog(protected val activity: Activity, private val resId: I
 
     abstract fun ViewGroup.onView()
 
+    @JvmOverloads
     fun show(gravity: Int = Gravity.BOTTOM)
     {
         if (!dialog.isShowing)

@@ -26,7 +26,7 @@ abstract class BaseBottomDialog(protected val activity: Activity, private val re
     private var isInit = false
 
     abstract fun ViewGroup.onView()
-    fun ViewGroup.onShow(){}
+    open fun ViewGroup.onShow(){}
 
     fun show()
     {

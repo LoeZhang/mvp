@@ -40,6 +40,7 @@ abstract class BaseBottomDialog(protected val activity: Activity, private val re
                     ?.setBackgroundResource(android.R.color.transparent)
                 rootView = dialog.window.decorView as ViewGroup
                 rootView.onView()
+                isInit = true
             }
 
             dialog.show()

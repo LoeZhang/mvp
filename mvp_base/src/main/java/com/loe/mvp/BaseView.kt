@@ -26,6 +26,8 @@ interface BaseView
 
     fun start(kCls: KClass<out Activity>, delay: Long = 0) = root.start(kCls, delay)
 
+    fun start(clsName: String, delay: Long = 0) = root.start(clsName, delay)
+
     fun BaseView.finish() = root.finish()
 
     fun BaseView.overridePendingTransition(enterAnim: Int, exitAnim: Int) = root.overridePendingTransition(enterAnim, exitAnim)

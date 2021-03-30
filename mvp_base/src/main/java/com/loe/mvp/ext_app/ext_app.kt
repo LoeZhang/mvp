@@ -90,6 +90,12 @@ fun Context?.start(kCls: KClass<out Activity>, delay: Long = 0): XIntent
     return start(kCls.java, delay)
 }
 
+fun Context?.start(clsName: String, delay: Long = 0): XIntent
+{
+    val cls = Class.forName(clsName) as Class<out Activity>
+    return start(cls, delay)
+}
+
 fun Fragment?.start(cls: Class<out Activity>, delay: Long = 0): XIntent
 {
     return this?.activity.start(cls, delay)
@@ -98,6 +104,12 @@ fun Fragment?.start(cls: Class<out Activity>, delay: Long = 0): XIntent
 fun Fragment?.start(kCls: KClass<out Activity>, delay: Long = 0): XIntent
 {
     return this?.activity.start(kCls, delay)
+}
+
+fun Fragment?.start(clsName: String, delay: Long = 0): XIntent
+{
+    val cls = Class.forName(clsName) as Class<out Activity>
+    return this?.activity.start(cls, delay)
 }
 
 /**

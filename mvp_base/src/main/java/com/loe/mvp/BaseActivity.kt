@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
+import com.loe.mvp.ext_app.setStatusText
 import com.loe.mvp.initer.BaseIniter
 import com.loe.mvp.initer.BaseLoading
 import com.loe.mvp.initer.BaseToast
@@ -20,6 +21,8 @@ open class BaseActivity : AppCompatActivity(), BaseView
         activity = this
         mToast = BaseToast(activity)
         mLoading = BaseLoading(activity)
+
+        setStatusText()
 
         BaseIniter.onBaseView?.onCreate(this)
     }
